@@ -195,6 +195,6 @@ class App extends Component {
   //   );
   // }
 }
-
-export default App;
 //window = window.self;
+export default App;
+
