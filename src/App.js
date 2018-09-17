@@ -9,7 +9,7 @@ class App extends Component {
     var mathbox = window.mathBox({
       element: this.root,
       plugins: ['core', 'controls', 'cursor', 'stats'],
-      //controls: {klass: window.THREE.OrbitControls}
+      controls: {klass: window.THREE.OrbitControls}
     });
 
     if (mathbox.fallback) throw 'WebGL not supported';
