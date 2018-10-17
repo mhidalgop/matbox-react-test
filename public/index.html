@@ -10,7 +10,8 @@
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
-    <script src="../js/mathbox-bundle.js"></script>
+    <script src="/js/mathbox-bundle.js"></script>
+    <link rel="stylesheet" href="/css/mathbox.css">
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -23,10 +24,46 @@
     <title>React App</title>
   </head>
   <body>
+    <style>
+      #mathbox {
+        position:fixed;
+        width: 100vw;
+        height: 100%;
+      }
+      </style>
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
     <div id="root"></div>
+    <div id='mathbox'></div>
+    <script>
+    /*
+    *  Some Comments:
+    *  - sincce there isn't a (relaiable, documented) mathbox npm package,
+    *    we load it as a script.
+    *  - Initializing mathbox inside a React Component led to some issues
+    *    with thisArg. Not sure why.
+    */
+    const mathboxElement = document.getElementById('mathbox')
+
+    const mathbox = mathBox({
+      plugins: ['core', 'controls', 'cursor'],
+      controls: {
+        klass: THREE.OrbitControls
+      },
+      element: mathboxElement,
+      camera: {
+        // up: new THREE.Vector3(0, 0, 1)
+      }
+    });
+    const three = mathbox.three;
+
+    three.camera.position.set(1, 1, 2);
+
+    // These window bindings are used by MathBox react component.
+    window.mathbox = mathbox
+    window.mathboxElement = mathboxElement
+    </script>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
