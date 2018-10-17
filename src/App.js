@@ -6,13 +6,9 @@ class App extends Component {
 
   componentDidMount() {
     //console.log(window);
-    var mathbox = window.mathBox({
-      element: this.root,
-      plugins: ['core', 'controls', 'cursor', 'stats'],
-      controls: {klass: window.THREE.OrbitControls}
-    });
-
-    if (mathbox.fallback) throw 'WebGL not supported';
+    var mathbox = window.mathbox
+    var mathboxElement = window.mathboxElement
+    this.root.appendChild(mathboxElement)
 
     var three = mathbox.three;
     three.renderer.setClearColor(new window.THREE.Color(0x000000), 1.0);
@@ -178,7 +174,7 @@ class App extends Component {
     updateGraph();
   }
   render() {
-    return <div ref={r => (this.root = r)} />;
+    return <div ref={ref => (this.root = ref)} />;
   }
 
   // render() {
@@ -197,4 +193,3 @@ class App extends Component {
 }
 //window = window.self;
 export default App;
-
